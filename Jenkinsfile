@@ -2,7 +2,7 @@ pipeline {
     agent any
     environment {
         //be sure to replace "texanraj/welcomeapp" with your own Docker image
-        DOCKER_IMAGE_NAME = "texanraj/welcomeapp"
+        DOCKER_IMAGE_NAME = "viksesh/welcomeapp"
     }
     stages {
     
@@ -29,16 +29,16 @@ pipeline {
                 }
             }
         }
-        stage('Scan Docker Image Using Aqua') {
-            when {
-                branch 'master'
-            }    
-            steps {
-                script {            
-                    aqua customFlags: '', hideBase: false, hostedImage: DOCKER_IMAGE_NAME, localImage: '', locationType: 'hosted', notCompliesCmd: '', onDisallowed: 'ignore', policies: '', register: false, registry: 'Docker Hub', showNegligible: true
-                    }
-            }
-        }
+        // stage('Scan Docker Image Using Aqua') {
+        //     when {
+        //         branch 'master'
+        //     }    
+        //     steps {
+        //         script {            
+        //             aqua customFlags: '', hideBase: false, hostedImage: DOCKER_IMAGE_NAME, localImage: '', locationType: 'hosted', notCompliesCmd: '', onDisallowed: 'ignore', policies: '', register: false, registry: 'Docker Hub', showNegligible: true
+        //             }
+        //     }
+        // }
         
         stage('DeployToProduction') {
             when {
